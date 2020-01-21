@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -123,6 +124,29 @@ public class JobData {
             System.out.println("Failed to load job data");
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<HashMap<String, String>> findByValue (String value){
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+//        TreeMap<String, Integer> sorted = new TreeMap<>();
+
+
+        for (HashMap<String, String> row : allJobs) {
+            for (Map.Entry columns : row.entrySet()) {
+                String aValue = ((String) columns.getValue());
+                if (aValue.toLowerCase().contains(value.toLowerCase())) {
+                    if (!jobs.contains(row)) {
+                        jobs.add(row);
+                    }
+                }
+
+            }
+
+        }
+        return jobs; // Should return a list of values of that contain the users input value
     }
 
 }
